@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "glr-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,6 +17,7 @@
     "redux": "^4.2.0",
     "redux-saga": "^1.2.2",
     "reselect": "^4.1.7",
+    "spinners-react": "^1.0.7",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

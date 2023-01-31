@@ -1,15 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from './../../modules/Login/components/Login/Login';
+import PrivateRoute from '../../modules/Auth/components/Auth/PrivateRoute';
+import Login from '../../modules/Auth/components/Login/Login';
 import Dashboard from './../../modules/Dashboard/components/Dashboard/Dashboard';
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/login",
         element: <Login />,
     },
     {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
     },
 ]);
 
