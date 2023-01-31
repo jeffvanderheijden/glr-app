@@ -4,7 +4,9 @@ import { Statuses } from './../../helpers/constants/loadingStatus';
 
 const initialState = {
     status: Statuses.EMPTY,
-    auth: Statuses.EMPTY
+    auth: Statuses.EMPTY,
+    auth_status: Statuses.EMPTY,
+    user: null
 }
 
 const login = createReducer(initialState, (builder) => {
@@ -14,6 +16,12 @@ const login = createReducer(initialState, (builder) => {
         })
         .addCase(constants.SET_USER_AUTH, (state, action) => {
             state.auth = action.payload
+        })
+        .addCase(constants.SET_AUTH_STATUS, (state, action) => {
+            state.auth_status = action.payload
+        })
+        .addCase(constants.SET_USER, (state, action) => {
+            state.user = { ...action.payload }
         })
 });
 

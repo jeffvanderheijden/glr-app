@@ -10,9 +10,10 @@ const tryLoginAuth = function* (action) {
             email: action.payload.email,
             password: action.payload.password
         }
-        yield delay(2000);
+        // Fake delay to show loading state
+        yield delay(2000); 
         const authReq = yield call(userLogin, requestParams);
-        // If unauthorized error
+        // If unauthorized: error
         if (authReq && authReq.response && authReq.response.status && authReq.response.status === 401) {
             // set error message
             yield put(actions.setLoginStatus(Statuses.ERROR));
@@ -24,7 +25,6 @@ const tryLoginAuth = function* (action) {
             yield put(actions.setLoginStatus(Statuses.DONE));
         }
     } catch (err) {
-        console.log(err);
         yield put(actions.setLoginStatus(Statuses.ERROR));
     }
 }

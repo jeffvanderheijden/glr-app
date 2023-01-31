@@ -5,6 +5,10 @@ import Dashboard from './../../modules/Dashboard/components/Dashboard/Dashboard'
 
 const router = createBrowserRouter([
     {
+        path: "/",
+        element: <PrivateRoute><Dashboard /></PrivateRoute>,
+    },
+    {
         path: "/login",
         element: <Login />,
     },

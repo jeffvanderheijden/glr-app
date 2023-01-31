@@ -1,18 +1,30 @@
+import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import actions from '../../actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Statuses } from './../../../../helpers/constants/loadingStatus';
 
 const PrivateRoute = ({ children }) => {
     const dispatch = useDispatch();
-    const token = '';
-    dispatch(actions.tryTokenAuth({ token }));
-    // How to delay render until after auth?
+    const authStatus = useSelector(state => state.login.auth_status);
+    const user = useSelector(state => state.login.user);
+    const token = localStorage.getItem('glr-jwt');
 
-    if (!token) {
-        return <Navigate to="/login" replace />;
-    }
+    useEffect(() => {
+        dispatch(actions.tryTokenAuth({ token }));
+    }, [dispatch, token]);
 
-    return children;
+    return (
+        <>
+            {authStatus === Statuses.ERROR && (
+                <Navigate to="/login" replace={true} />
+            )}
+
+            {authStatus === Statuses.DONE && user.id !== false && (
+                children
+            )}
+        </>
+    )
 };
 
 export default PrivateRoute;

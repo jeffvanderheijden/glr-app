@@ -47,18 +47,13 @@ app.post('/auth/login', (req, res) => {
 
 // Verifies JWT token
 app.post('/auth/token', (req, res) => {
-    const token = req.token;
-
+    const token = req.body.token;
     if (token) {
-        // const token = authHeader.split(' ')[1];
-        console.log(token);
-
-        jwt.verify(token, JWT_SECRET, (err, user) => {
+        jsonwebtoken.verify(token, JWT_SECRET, (err, user) => {
             if (err) {
                 return res.sendStatus(403);
             }
-
-            req.user = user;
+            return res.json({ user: user });
         });
     } else {
         res.sendStatus(401);
