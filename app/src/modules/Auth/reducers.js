@@ -6,7 +6,7 @@ const initialState = {
     status: Statuses.EMPTY,
     auth: Statuses.EMPTY,
     auth_status: Statuses.EMPTY,
-    user: null
+    user: Statuses.EMPTY
 }
 
 const login = createReducer(initialState, (builder) => {

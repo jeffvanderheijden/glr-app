@@ -2,6 +2,7 @@ import React from 'react';
 import { SpinnerCircular } from 'spinners-react';
 import { Statuses } from '../../../../helpers/constants/loadingStatus';
 import GLRLogo from './GLRLogo';
+import styles from './LoginView.module.scss';
 
 const LoginView = ({
     setEmail,
@@ -12,7 +13,7 @@ const LoginView = ({
     return (
         <div className="flex items-center w-screen md:h-screen md:justify-center">
             <div className="flex items-center drop-shadow-xl w-full justify-center p-4 flex-col sm:px-6 md:py-12 md:items-stretch md:flex-row lg:px-8">
-                <div className="bg-glr-green-500 relative flex h-60 min-h-full w-full md:max-w-xl rounded-t-xl justify-center items-center md:rounded-tr-none md:rounded-l-xl md:h-auto">
+                <div className={styles.gradient + " bg-glr-green-500 relative flex h-60 min-h-full w-full md:max-w-xl rounded-t-xl justify-center items-center md:rounded-tr-none md:rounded-l-xl md:h-auto"}>
                     <iframe title="animationFrame" className="w-full h-full" src="https://embed.lottiefiles.com/animation/82423"></iframe>
                     <div className="absolute w-full h-full" />
                 </div>

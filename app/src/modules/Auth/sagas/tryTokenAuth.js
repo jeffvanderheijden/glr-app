@@ -13,7 +13,7 @@ const tryTokenAuth = function* (action) {
             yield put(actions.setAuthStatus(Statuses.DONE));
         }
         if(authReq.name === 'AxiosError') {
-            yield put(actions.setAuthStatus(Statuses.ERROR));    
+            yield put(actions.setAuthStatus(Statuses.ERROR));
         }
     } catch (err) {
         yield put(actions.setAuthStatus(Statuses.ERROR));
