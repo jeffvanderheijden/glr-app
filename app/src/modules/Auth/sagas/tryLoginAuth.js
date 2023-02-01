@@ -11,7 +11,7 @@ const tryLoginAuth = function* (action) {
             password: action.payload.password
         }
         // Fake delay to show loading state
-        yield delay(2000); 
+        yield delay(2000);
         const authReq = yield call(userLogin, requestParams);
         // If unauthorized: error
         if (authReq && authReq.response && authReq.response.status && authReq.response.status === 401) {

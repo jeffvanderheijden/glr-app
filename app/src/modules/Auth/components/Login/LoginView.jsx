@@ -25,15 +25,9 @@ const LoginView = ({
                         <h2 className="mt-6 text-center text-3xl tracking-tight text-gray-900">
                             Sign in to GLR Dash
                         </h2>
-                        {loginStatus === Statuses.ERROR ? (
-                            <p className="mt-3 text-center text-sm tracking-tight text-red-500">
-                                Something went wrong while trying to sign in. Please check your email and password.
-                            </p>
-                        ) : (
-                            <p className="mt-3 text-center text-sm tracking-tight text-gray-300">
-                                GLR Dash tries to tie all lose software ends together in one user-friendly platform.
-                            </p>
-                        )}
+                        <p className="mt-3 text-center text-sm tracking-tight text-gray-300">
+                            GLR Dash tries to tie all lose software ends together in one user-friendly platform.
+                        </p>
                     </div>
                     <form className="mt-8 space-y-6">
                         <input type="hidden" name="remember" defaultValue="true" />
