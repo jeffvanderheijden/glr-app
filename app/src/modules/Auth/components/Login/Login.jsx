@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import actions from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const loginStatus = useSelector(state => state.login.status);
     const auth = useSelector(state => state.login.auth);
 
@@ -23,21 +24,19 @@ const Login = () => {
         if (loginStatus === Statuses.ERROR) {
             toast.error("Log in failed. Please check username and password.");
         }
-    }, [loginStatus])
+
+        if (loginStatus === Statuses.DONE && auth !== false) {
+            navigate('/dashboard');
+        }
+    }, [loginStatus, auth, navigate])
     
     return (
-        <>
-            {(loginStatus === Statuses.DONE && auth !== false) ? (
-                <Navigate to="/dashboard" replace={true} />
-            ) : (
-                <LoginView 
-                    setEmail={setEmail}
-                    setPassword={setPassword}
-                    submitForm={submitForm}
-                    loginStatus={loginStatus}
-                />
-            )}
-        </>
+        <LoginView 
+            setEmail={setEmail}
+            setPassword={setPassword}
+            submitForm={submitForm}
+            loginStatus={loginStatus}
+        />
     )
 }
 
