@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import styles from './DashboardView.module.scss';  
+import styles from './AgendaView.module.scss';  
 
-const DashboardView = () => {
+const AgendaView = () => {
     return (
-        <div className={styles.dashboard}>
+        <div className={styles.agenda}>
             <div className="grid grid-cols-10 h-screen">
                 <div className="col-span-2 border-r">
                     <div className="flex items-center w-full border-b h-20 px-10">
@@ -18,7 +18,7 @@ const DashboardView = () => {
                 </div>
                 <div className="col-span-6">
                     <div className="flex items-center w-full border-b h-20 px-10">
-                        DASHBOARD 
+                        AGENDA 
                     </div>
                 </div>
                 <div className="col-span-2 border-l">
@@ -31,4 +31,4 @@ const DashboardView = () => {
     )
 }
 
-export default DashboardView;
+export default AgendaView;

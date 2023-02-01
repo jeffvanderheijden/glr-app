@@ -7,11 +7,13 @@ import {
 import PrivateRoute from '../../modules/Auth/components/Auth/PrivateRoute'
 import Login from '../../modules/Auth/components/Login/Login'
 import Dashboard from './../../modules/Dashboard/components/Dashboard/Dashboard'
+import Agenda from './../../modules/Agenda/components/Agenda/Agenda'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 
 const routes = [
     { path: '/', name: 'Dashboard', element: <PrivateRoute><Dashboard /></PrivateRoute>, nodeRef: createRef() },
     { path: '/dashboard', name: 'Dashboard', element: <PrivateRoute><Dashboard /></PrivateRoute>, nodeRef: createRef() },
+    { path: '/agenda', name: 'Agenda', element: <PrivateRoute><Agenda /></PrivateRoute>, nodeRef: createRef() },
     { path: '/login', name: 'Login', element: <Login />, nodeRef: createRef() },
 ]
 
