@@ -4,7 +4,7 @@ const port = 3001;
 
 const jsonwebtoken = require("jsonwebtoken");
 const bodyParser = require('body-parser');
-const axios = require('axios');
+// const axios = require('axios');
 // mock data for users, replace with database
 const user = require('./database/user/user');
 
@@ -62,4 +62,4 @@ app.post('/auth/token', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+});
