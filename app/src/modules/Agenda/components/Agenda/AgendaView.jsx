@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import useLogout from '../../../../helpers/hooks/useLogout';
 import styles from './AgendaView.module.scss';  
 
 const AgendaView = () => {
+    const logout = useLogout();
+
     return (
         <div className={styles.agenda}>
             <div className="grid grid-cols-10 h-screen">
@@ -13,7 +16,7 @@ const AgendaView = () => {
                     <ul className="p-10">
                         <li><Link to="/dashboard">Dashboard</Link></li>
                         <li><Link to="/agenda">Agenda</Link></li>
-                        <li>Logout</li>
+                        <li onClick={logout}>Logout</li>
                     </ul>
                 </div>
                 <div className="col-span-6">

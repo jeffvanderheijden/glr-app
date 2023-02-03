@@ -12,6 +12,7 @@ const Login = () => {
     const navigate = useNavigate();
     const loginStatus = useSelector(state => state.login.status);
     const auth = useSelector(state => state.login.auth);
+    const authStatus = useSelector(state => state.login.auth_status);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,10 +26,15 @@ const Login = () => {
             toast.error("Log in failed. Please check username and password.");
         }
 
+        if(authStatus === Statuses.ERROR) {
+            toast.error("Something went wrong. Please make sure you're logged in.");
+            dispatch(actions.setAuthStatus(Statuses.EMPTY));
+        }
+
         if (loginStatus === Statuses.DONE && auth !== false) {
             navigate('/dashboard');
         }
-    }, [loginStatus, auth, navigate])
+    }, [loginStatus, auth, authStatus, navigate, dispatch])
     
     return (
         <LoginView 
