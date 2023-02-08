@@ -9,6 +9,7 @@ import Login from '../../modules/Auth/components/Login/Login'
 import Dashboard from '../../modules/Dashboard/components/Dashboard/Dashboard'
 import Agenda from '../../modules/Agenda/components/Agenda/Agenda'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
+import AppLayout from '../layout/AppLayout';
 
 const routes = [
     { path: '/', name: 'Login', element: <Login />, nodeRef: createRef() },
@@ -21,6 +22,7 @@ const Router = () => {
     const location = useLocation()
     const currentOutlet = useOutlet()
     const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
+
     return (
         <SwitchTransition>
             <CSSTransition
@@ -31,9 +33,19 @@ const Router = () => {
                 unmountOnExit
             >
                 {() => (
-                    <div ref={nodeRef} className="page">
-                        {currentOutlet}
-                    </div>
+                    <>
+                        {location.pathname === '/' || location.pathname === '/login' ? (
+                            <div ref={nodeRef} className="page">
+                                {currentOutlet}
+                            </div>
+                        ) : (
+                            <AppLayout>
+                                <div ref={nodeRef} className="page">
+                                    {currentOutlet}
+                                </div>
+                            </AppLayout>
+                        )}
+                    </>
                 )}
             </CSSTransition>
         </SwitchTransition>

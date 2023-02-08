@@ -17,7 +17,7 @@ const PrivateRoute = ({ children }) => {
 
     useEffect(() => {
         if (authStatus === Statuses.ERROR) {
-            navigate('/login');
+            navigate('/');
         }
     }, [navigate, authStatus])
 
