@@ -3,21 +3,26 @@ import SideNav from '../navigation/SideNav';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Dropdown from './../components/Dropdown/Dropdown';
+import styles from './AppLayout.module.scss';
 
 const AppWrapper = ({ children }) => {
     const [userDropdown, setUserDropdown] = useState(false);
     const user = useSelector(state => state.login.user.user);
+    const [navSize, setNavSize] = useState('large');
+
+    const toggleNavSize = () => {
+        navSize === 'small' ? setNavSize('large') : setNavSize('small');
+    }
 
     return (
-        <div>
-        <div className="grid grid-cols-10 h-screen">
-            <div className="col-span-2 bg-gray-800">
-                <div className="flex items-center w-full h-20 px-10">
-                    Logo
-                </div>
-                <SideNav />
+        <div className="flex h-screen">
+            <div className={(navSize === 'small' ? styles.sidebarSmall : styles.sidebar) + " bg-gray-800"}>
+                <SideNav 
+                    navSize={navSize}
+                    toggleNavSize={toggleNavSize}
+                />
             </div>
-            <div className="col-span-8 bg-gray-100 flex flex-col">
+            <div className={(navSize === 'small' ? styles.appMainSmall : styles.appMain) + " bg-gray-100 flex flex-col"}>
                 <div className="flex items-center justify-end w-full border-b h-20 px-8">
                     <div className="flex items-center cursor-pointer" onClick={() => { setUserDropdown(!userDropdown) }}>
                         <p className="pr-2 text-sm">{user && user}</p>
@@ -38,12 +43,11 @@ const AppWrapper = ({ children }) => {
                 </div>
                 <div className="flex w-full h-full p-8">
                     <div className="bg-white p-8 rounded-md drop-shadow-xl w-full">
-                        {children}
+                        { children }
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     )
 }
 

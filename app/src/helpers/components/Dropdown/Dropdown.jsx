@@ -31,7 +31,7 @@ const Dropdown = ({
             nodeRef={nodeRef}
             in={inProp}
         >
-            <div ref={nodeRef} className="dropdown">
+            <div ref={nodeRef}>
                 {children}
             </div>
         </CSSTransition>

@@ -1,3 +1,9 @@
+.smallSideNav {
+    i {
+        font-size: 20px;
+    }
+}
+
 .sideNav {
     li, a {
         width: 100%;
@@ -10,5 +16,11 @@
     i {
         padding-right: 5px;
         font-size: 20px;
+    }
+    .showHide {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 }

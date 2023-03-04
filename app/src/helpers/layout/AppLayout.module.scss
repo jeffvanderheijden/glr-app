@@ -1,0 +1,19 @@
+.sidebar {
+    width: 20%;
+    transition: all .3s;
+}
+
+.appMain {
+    width: 80%;
+    transition: all .3s;
+}
+
+.sidebarSmall {
+    width: 80px;
+    transition: all .3s;
+}
+
+.appMainSmall {
+    width: calc(100% - 80px);
+    transition: all .3s;
+}

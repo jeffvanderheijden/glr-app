@@ -1,7 +1,7 @@
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { RouterProvider } from "react-router-dom";
 import store from './helpers/state/store';
-import router from './helpers/navigation/router';
+import AnimatedRouter from './helpers/navigation/Router';
 import { ToastContainer, Slide } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import './helpers/styles/main.scss';
@@ -22,7 +22,9 @@ function App() {
         pauseOnHover
         theme="light"
       />
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <AnimatedRouter />
+      </BrowserRouter>
     </Provider>
   );
 }

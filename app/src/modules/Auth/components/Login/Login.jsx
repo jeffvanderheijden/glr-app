@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import actions from '../../actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import LoginView from './LoginView';
 import { Statuses } from './../../../../helpers/constants/loadingStatus';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
     const loginStatus = useSelector(state => state.login.status);
     const auth = useSelector(state => state.login.auth);
     const authStatus = useSelector(state => state.login.auth_status);
@@ -37,12 +39,19 @@ const Login = () => {
     }, [loginStatus, auth, authStatus, navigate, dispatch])
     
     return (
-        <LoginView 
-            setEmail={setEmail}
-            setPassword={setPassword}
-            submitForm={submitForm}
-            loginStatus={loginStatus}
-        />
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            key={location.pathname}
+        >
+            <LoginView 
+                setEmail={setEmail}
+                setPassword={setPassword}
+                submitForm={submitForm}
+                loginStatus={loginStatus}
+            />
+        </motion.div>
     )
 }
 

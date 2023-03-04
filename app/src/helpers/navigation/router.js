@@ -1,67 +1,49 @@
-import { createRef } from 'react'
-import {
-    createBrowserRouter,
-    useLocation,
-    useOutlet,
-} from 'react-router-dom'
-import PrivateRoute from '../../modules/Auth/components/Auth/PrivateRoute'
-import Login from '../../modules/Auth/components/Login/Login'
-import Dashboard from '../../modules/Dashboard/components/Dashboard/Dashboard'
-import Agenda from '../../modules/Agenda/components/Agenda/Agenda'
-import { CSSTransition, SwitchTransition } from 'react-transition-group'
-import AppLayout from '../layout/AppLayout';
+import { useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
-const routes = [
-    { path: '/', name: 'Login', element: <Login />, nodeRef: createRef() },
-    { path: '/login', name: 'Login', element: <Login />, nodeRef: createRef() },
-    { path: '/dashboard', name: 'Dashboard', element: <PrivateRoute><Dashboard /></PrivateRoute>, nodeRef: createRef() },
-    { path: '/agenda', name: 'Agenda', element: <PrivateRoute><Agenda /></PrivateRoute>, nodeRef: createRef() },
-]
+import PrivateRoute from '../../modules/Auth/components/Auth/PrivateRoute';
+import Login from '../../modules/Auth/components/Login/Login';
+import Dashboard from '../../modules/Dashboard/components/Dashboard/Dashboard';
+import Agenda from '../../modules/Agenda/components/Agenda/Agenda';
 
-const Router = () => {
-    const location = useLocation()
-    const currentOutlet = useOutlet()
-    const { nodeRef } = routes.find((route) => route.path === location.pathname) ?? {}
+import SideNav from '../navigation/SideNav';
+
+const AnimatedRouter = () => {
+    const location = useLocation();
+    const [navSize, setNavSize] = useState('large');
+
+    const toggleNavSize = () => {
+        setNavSize(navSize === 'large' ? 'small' : 'large');
+    }
 
     return (
-        <SwitchTransition>
-            <CSSTransition
-                key={location.pathname}
-                nodeRef={nodeRef}
-                timeout={300}
-                classNames="page"
-                unmountOnExit
-            >
-                {() => (
-                    <>
-                        {location.pathname === '/' || location.pathname === '/login' ? (
-                            <div ref={nodeRef} className="page">
-                                {currentOutlet}
-                            </div>
-                        ) : (
-                            <AppLayout>
-                                <div ref={nodeRef} className="page">
-                                    {currentOutlet}
-                                </div>
-                            </AppLayout>
-                        )}
-                    </>
-                )}
-            </CSSTransition>
-        </SwitchTransition>
-    )
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+                <Route path="/" element={
+                    <Login />
+                } />
+                <Route path="/dashboard" element={
+                    <PrivateRoute>
+                        <SideNav 
+                            navSize={navSize}
+                            toggleNavSize={toggleNavSize}
+                        />
+                        <Dashboard />
+                    </PrivateRoute>
+                } />
+                <Route path="/agenda" element={
+                    <PrivateRoute>
+                        <SideNav 
+                            navSize={navSize}
+                            toggleNavSize={toggleNavSize}
+                        />
+                        <Agenda />
+                    </PrivateRoute>
+                } />
+            </Routes>
+        </AnimatePresence>
+    );
 }
 
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Router />,
-        children: routes.map((route) => ({
-            index: route.path === '/',
-            path: route.path === '/' ? undefined : route.path,
-            element: route.element,
-        })),
-    },
-])
-
-export default router;
+export default AnimatedRouter;
