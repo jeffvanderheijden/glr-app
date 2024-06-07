@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import SideNav from '../navigation/SideNav';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Dropdown from './../components/Dropdown/Dropdown';
@@ -16,12 +15,6 @@ const AppWrapper = ({ children }) => {
 
     return (
         <div className="flex h-screen">
-            <div className={(navSize === 'small' ? styles.sidebarSmall : styles.sidebar) + " bg-gray-800"}>
-                <SideNav 
-                    navSize={navSize}
-                    toggleNavSize={toggleNavSize}
-                />
-            </div>
             <div className={(navSize === 'small' ? styles.appMainSmall : styles.appMain) + " bg-gray-100 flex flex-col"}>
                 <div className="flex items-center justify-end w-full border-b h-20 px-8">
                     <div className="flex items-center cursor-pointer" onClick={() => { setUserDropdown(!userDropdown) }}>
